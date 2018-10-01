@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,4 +16,11 @@ public class LevelManager : MonoBehaviour {
             Debug.Log("Quit game requested from user.");
             Application.Quit();
         }
+
+        public void LoadNextLevel() {
+        Brick.BricksLeft = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+        
 }

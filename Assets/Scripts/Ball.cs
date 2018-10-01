@@ -37,4 +37,9 @@ public class Ball : MonoBehaviour {
             this.transform.position = paddle.transform.position + paddleToBallVector;
         }
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        Vector2 tweak = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+        ballRigidBody2D.velocity += tweak;
+    }
 }

@@ -12,8 +12,8 @@ public class LooseCollider : MonoBehaviour {
     }
     //Look into Block Breaker (5th Udemy package) under video 72 for more info on triggers and collisions!
     void OnTriggerEnter2D(Collider2D collision) {
-        print("Trigger");
-        lManager.LoadLevel("Win");
+        lManager.LoadLevel("Lose");
+        Brick.BricksLeft = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {

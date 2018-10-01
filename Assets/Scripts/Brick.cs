@@ -4,34 +4,46 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour {
 
+    public int numHitsLeft;
 
-    public int maxHits;
-
-    SpriteRenderer sRenderer;
+    private static int bricksLeft;
 
 	// Use this for initialization
 	void Start () {
-        sRenderer = gameObject.GetComponent<SpriteRenderer>();
+        bricksLeft++;
+    }
+
+    public static int BricksLeft
+    {
+        get { return bricksLeft; }
+        set
+        {
+            bricksLeft = value;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        maxHits--;
+        numHitsLeft--;
 
-        switch (maxHits) {
+        switch (numHitsLeft) {
 
             case 1:
-                sRenderer.color = new Color32(95, 151, 217, 255);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(95, 151, 217, 255);
                 break;
             case 2:
-                sRenderer.color = new Color32(197, 53, 53, 255);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(197, 53, 53, 255);
                 break;
             case 3:
-                sRenderer.color = new Color32(178, 68, 156, 255);
+                gameObject.GetComponent<SpriteRenderer>().color = new Color32(178, 68, 156, 255);
                 break;
         }
-
-        if (maxHits == 0) {
+        
+        if (numHitsLeft <= 0) {
+            bricksLeft--;
             Destroy(gameObject);
+        }
+        if (bricksLeft == 0) {
+            GameObject.FindObjectOfType<LevelManager>().LoadNextLevel();
         }
     }
 }
